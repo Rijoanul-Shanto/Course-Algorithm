@@ -1,0 +1,56 @@
+/*
+ * Rijoanul Hasan Shanto
+ * Check Ascending or Descending
+ * Monday, October 3, 2016
+ * 10:45:13 AM
+ * Language : C++
+ * Homework :)
+*/
+
+
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <cstdlib>
+#include <algorithm>
+using namespace std;
+
+int check(int array[], int n)
+{
+    int i, j, flag = 1, temp = array[0];
+    int ascending = 1, descending = 1;
+
+    for(i = 1; i < n; i++)
+    {
+        if(array[i] < array[i-1])
+            ascending = 0;
+
+        else if(array[i] > array[i - 1])
+            descending = 0;
+    }
+
+    if(ascending) return 0;
+    else if(descending) return 1;
+    else return -1;
+}
+
+int main()
+{
+    int n, temp;
+
+    while(cin >> n)
+    {
+        int array[n];
+        for(int i = 0; i < n; i++)
+            cin >> array[i];
+
+        temp = check(array, n);
+
+        if(temp == 0) cout << "Ascending" << endl;
+        else if(temp == 1) cout << "Descending Order" << endl;
+        else cout << "Neither Ascending or Neither Descending" << endl;
+    }
+
+    return 0;
+}
