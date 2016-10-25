@@ -1,0 +1,74 @@
+/*
+ * Rijoanul Hasan
+ * 0-1 Knapsack
+ * Dynamic Programming
+ * C++
+*/
+
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <string>
+#include <cstdlib>
+#define ll long long int
+#define TESTCASE int t;scanf("%d", &t);for(int i = 0; i < t; i++)
+#define FOR(n) for(int i = 0; i < n; i++)
+#define PF printf
+#define SF scanf
+using namespace std;
+
+void knapsack(int array[][2], int n, int w)
+{
+    int r = n+1, c = w+1;
+    int dp[r][c];
+    FOR(r) dp[i][0] = 0;
+    FOR(c) dp[0][i] = 0;
+
+    for(int i = 1; i < r; i++)
+    {
+        for(int j = 1; j < c; j++)
+        {
+            if(array[i-1][1] > j) dp[i][j] = dp[i-1][j];
+            else dp[i][j] = max(dp[i-1][j], (array[i-1][0] + dp[i-1][j-array[i-1][1]]));
+        }
+    }
+//    for(int i = 0; i < r; i++)
+//    {
+//        for(int j = 0; j < c; j++)
+//        {
+//            cout <<dp[i][j] << ' ';
+//        }
+//        cout << endl;
+//    }
+
+///     Backtrack
+    int i = r-1, j = c-1;
+    cout << endl;
+    while(i > 0 && j > 0)
+    {
+        if(dp[i][j] != dp[i-1][j])
+        {
+            cout << array[i-1][0] << ' ' << array[i-1][1] << endl;
+            j -= array[i-1][1];
+            i--;
+        }
+        else i--;
+    }
+
+}
+
+int main()
+{
+    int n, w;
+
+    while(cin >> w >> n)
+    {
+        int array[n][2];
+        FOR(n) cin >> array[i][0] >> array[i][1];
+        knapsack(array, n, w);
+    }
+
+
+    return 0;
+}
