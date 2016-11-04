@@ -1,0 +1,56 @@
+/* 
+ * Rijoanul Hasan Shanto
+ * Permutation Generate : Distinct Elements
+ * C++
+*/
+
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <vector>
+#define PF printf
+#define SF scanf
+#define FOR(n) for(int i = 0; i < n; i++)
+using namespace std;
+
+vector <char> ch;
+int flag[100];
+
+void my_permute(char *str, int len)
+{
+    int i;
+    if(ch.size() == len)
+    {
+        //cout << ch << endl;
+        for(i = 0; i < len; i++)
+            cout << ch[i];
+        cout << endl;
+        return;
+    }
+
+    for(i = 0; i < len; i++)
+    {
+        if(!flag[i])
+        {
+            flag[i] = 1;
+            ch.push_back(str[i]);
+            my_permute(str, len);
+            flag[i] = 0;
+            ch.pop_back();
+        }
+    }
+}
+
+int main()
+{
+    char str[100];
+    while(cin >> str)
+    {
+        my_permute(str, strlen(str));
+    }
+
+    return 0;
+}
